@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Faye Ugo</title>
+    <style>
+        :root {
+            --primary-color: #ff7e5f;     /* Orange-rouge comme dans le portfolio */
+            --secondary-color: #feb47b;   /* Pêche comme dans le portfolio */
+            --tertiary-color: #ffeed0;    /* Crème comme dans le portfolio */
+            --accent-color: #7fc6a4;      /* Vert menthe comme dans le portfolio */
+            --dark-color: #2d2a32;        /* Gris foncé presque noir */
+            --light-color: #f9f9f9;       /* Blanc cassé */
+            --text-dark: #2d2a32;         /* Texte foncé */
+            --text-light: #f9f9f9;        /* Texte clair */
+            --gradient-warm: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --shadow: 0 10px 30px rgba(45, 42, 50, 0.1);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            color: var(--text-dark);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        header {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--secondary-color);
+            border: 3px solid white;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--light-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            margin: 5px 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            margin-right: 8px;
+            color: var(--tertiary-color);
+        }
+        
+        main {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .section-content {
+            padding-left: 15px;
+        }
+        
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+        }
+        
+        .timeline-subtitle {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content {
+            padding-left: 15px;
+            border-left: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        .skill-container {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: var(--light-color);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-warm);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .language-level {
+            background-color: var(--tertiary-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .interest-item {
+            background-color: var(--tertiary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: default;
+            color: var(--primary-color);
+        }
+        
+        .interest-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .print-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(127, 198, 164, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-item {
+                margin: 5px 0;
+            }
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            .profile-pic {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-container">
+                <div class="profile-pic" id="profile-pic">
+                    <img src="matete.jpg" alt="Faye Ugo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"/>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>49 rue cambacérès, 77230 Moussy-le-Neuf</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span>(33) 06 95 45 15 77</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>faye.ugo77@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🎂</span>
+                    <span>20 ans (09/04/2004)</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="left-column">
+                <section>
+                    <h2>COMPÉTENCES</h2>
+                    <div class="section-content">
+                        <div class="skill-container">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-name">
+                                <span>Kotlin</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-name">
+                                <span>PHP</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-container">
+                            <div class="skill-name">
+                                <span>SQL</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>LANGUES</h2>
+                    <div class="section-content">
+                        <div class="language-item">
+                            <span>Français</span>
+                            <span class="language-level">Langue maternelle</span>
+                        </div>
+                        <div class="language-item">
+                            <span>Anglais</span>
+                            <span class="language-level">B2 (TOEIC)</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>QUALITÉS</h2>
+                    <div class="section-content">
+                        <ul>
+                            <li>Rigoureux et sérieux</li>
+                            <li>Motivé et engagé</li>
+                            <li>Dynamique et proactif</li>
+                            <li>Attentif et analytique</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>CENTRES D'INTÉRÊT</h2>
+                    <div class="section-content">
+                        <div class="interests-container">
+                            <span class="interest-item">Développement web</span>
+                            <span class="interest-item">Nouvelles technologies</span>
+                            <span class="interest-item">Informatique</span>
+                            <span class="interest-item">Projet personnel</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="right-column">
+                <section>
+                    <h2>PROFIL</h2>
+                    <div class="section-content">
+                        <p>Élève en études supérieures, je suis à la recherche d'un stage dans le milieu de l'informatique. Motivé et sérieux, je saurai faire usage de mes compétences au service de votre entreprise.</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>FORMATION</h2>
+                    <div class="section-content">
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span>2023</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">BTS SIO</div>
+                                <div class="timeline-subtitle">Lycée Léonard de Vinci, Melun</div>
+                                <ul>
+                                    <li>Première année de BTS Services Informatiques aux Organisations</li>
+                                    <li>Option SLAM (Solutions Logicielles et Applications Métiers)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span>2022</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Baccalauréat Général</div>
+                                <div class="timeline-subtitle">Lycée Charles de Gaulle, Longperrier</div>
+                                <ul>
+                                    <li>Spécialités : Mathématiques et Sciences de l'ingénieur</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>EXPÉRIENCE PROFESSIONNELLE</h2>
+                    <div class="section-content">
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span>2025</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Stagiaire</div>
+                                <div class="timeline-subtitle">Entreprise WeeklyTech</div>
+                                <ul>
+                                    <li>Developpement d'une application en Java/JavaFX</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span>2024</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">Stage d'observation</div>
+                                <div class="timeline-subtitle">Service informatique Mairie, Moussy-le-Neuf</div>
+                                <ul>
+                                    <li>Gestion et maintenance du réseau informatique municipal</li>
+                                    <li>Configuration d'équipements réseau</li>
+                                    <li>Résolution de problèmes techniques pour les utilisateurs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>PROJETS</h2>
+                    <div class="section-content">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-title">Savon App / Api</div>
+                                <ul>
+                                    <li>Developpement de la partie Backend / Api</li>
+                                    <li>Developpement de la partie front de du site</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <button class="print-button" onclick="window.print()" title="Imprimer le CV">
+        🖨️
+    </button>
+    
+    <script>
+        // Animation des barres de compétences
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            // Initialiser les barres à 0%
+            skillBars.forEach(bar => {
+                const finalWidth = bar.style.width;
+                bar.style.width = '0%';
+                
+                // Animation progressive
+                setTimeout(() => {
+                    bar.style.width = finalWidth;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

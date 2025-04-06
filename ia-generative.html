@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - IA Générative</title>
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Styles inline pour éviter les problèmes de chargement -->
+    <style>
+        /* Variables de couleurs et styles de base - harmonisées avec le portfolio */
+        :root {
+            --primary-color: #ff7e5f;     /* Orange-rouge */
+            --secondary-color: #feb47b;   /* Pêche */
+            --tertiary-color: #ffeed0;    /* Crème */
+            --dark-color: #2d2a32;        /* Gris foncé presque noir */
+            --light-color: #f9f9f9;       /* Blanc cassé */
+            --text-dark: #2d2a32;         /* Texte foncé */
+            --text-light: #f9f9f9;        /* Texte clair */
+            --gradient-warm: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --shadow: 0 10px 30px rgba(45, 42, 50, 0.1);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        /* Header et navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(249, 249, 249, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 1px;
+            padding: 10px 22px;
+            position: relative;
+            transition: var(--transition);
+            margin: 0 5px;
+            border-radius: 30px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 126, 95, 0.1);
+        }
+
+        nav a.active {
+            color: var(--text-light);
+            background: var(--gradient-warm);
+            box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+        }
+
+        /* Section principale */
+        .ai-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 40px;
+            color: var(--text-dark);
+        }
+
+        /* Bouton de retour */
+        .return-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding: 12px 25px;
+            background-color: var(--light-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .return-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 42, 50, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .return-button i {
+            margin-right: 8px;
+        }
+
+        /* En-tête de la page */
+        .ai-header {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+            opacity: 0.8;
+        }
+
+        .ai-header h2 {
+            margin-top: 0;
+            font-weight: 700;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .ai-header p {
+            position: relative;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        /* Boîte de définition */
+        .definition-box {
+            background-color: white;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0 15px 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .definition-box h3 {
+            color: var(--text-dark);
+            margin-top: 0;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Titres de section */
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            margin: 3.5rem 0;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 15px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -16px;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 1.8rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content h4 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Grilles */
+        .models-grid, .applications-grid, .tools-grid, .challenges-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .models-grid {
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+
+        .applications-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .tools-grid, .challenges-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        /* Cartes */
+        .model-card, .application-item, .tool-card, .challenge-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .model-card:hover, .application-item:hover, .tool-card:hover, .challenge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+
+        .model-card, .tool-card {
+            overflow: hidden;
+        }
+
+        .model-header {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .model-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            opacity: 0.8;
+        }
+
+        .model-header h4, .application-item h4, .tool-card h4, .challenge-card h4 {
+            margin-top: 0;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .model-body, .tool-card, .challenge-card {
+            padding: 1.8rem;
+        }
+
+        .application-item {
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .application-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .model-body p, .tool-card p, .challenge-card p {
+            margin-bottom: 1rem;
+        }
+
+        .model-body strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Sections avec fond */
+        .tools-section {
+            background-color: var(--tertiary-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 3.5rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .tools-section h3, .sources-section h3 {
+            margin-top: 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tools-section h3::after, .sources-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-warm);
+            border-radius: 5px;
+        }
+
+        .challenge-card {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Liste d'outils */
+        .tool-card ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .tool-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card h4 {
+            color: var(--primary-color);
+        }
+
+        /* Section sources */
+        .sources-section {
+            margin: 3.5rem 0;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .sources-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .sources-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .sources-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .sources-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .sources-list a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 3rem;
+        }
+
+        /* Bouton de retour en haut */
+        #scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-warm);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        #scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scroll-top-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 126, 95, 0.4);
+        }
+
+        /* Adaptations responsives */
+        @media (max-width: 992px) {
+            .timeline-container::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+                right: auto;
+            }
+            
+            .left, .right {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-header {
+                padding: 1.8rem;
+            }
+            
+            .models-grid, .applications-grid, .tools-grid, .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="index.html#competences">Compétences</a>
+            <a href="index.html#projets">Projets</a>
+            <a href="index.html#stages">Stages</a>
+            <a href="index.html#veille" class="active">Veille Tech</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="ai-section">
+        <a href="index.html#veille" class="return-button">
+            <i class="fas fa-arrow-left"></i> Retour au portfolio
+        </a>
+        
+        <div class="ai-header">
+            <h2>IA Générative : Révolution créative et enjeux technologiques</h2>
+            <p>Exploration des modèles, applications et défis des intelligences artificielles capables de créer du contenu original</p>
+        </div>
+        
+        <div class="definition-box">
+            <h3>Qu'est-ce que l'IA Générative ?</h3>
+            <p>L'IA générative désigne une catégorie d'algorithmes d'intelligence artificielle capables de créer du contenu original - texte, images, vidéo, audio, code ou données - en s'inspirant des modèles qu'ils ont appris lors de leur entraînement. Contrairement aux IA discriminatives qui classifient ou prédisent, les IA génératives créent du nouveau contenu qui n'existait pas auparavant.</p>
+        </div>
+        
+        <h3>Évolution de l'IA Générative</h3>
+        
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2014</div>
+                    <h4>Réseaux antagonistes génératifs (GANs)</h4>
+                    <p>Introduction par Ian Goodfellow des GANs, une approche révolutionnaire où deux réseaux neuronaux s'affrontent pour produire des images de plus en plus réalistes.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2017</div>
+                    <h4>Attention et Transformers</h4>
+                    <p>Publication de "Attention is All You Need" par Google, introduisant l'architecture Transformer qui deviendra fondamentale pour les modèles de langage actuels.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2020</div>
+                    <h4>GPT-3 et DALL-E</h4>
+                    <p>OpenAI lance GPT-3 (175 milliards de paramètres) et DALL-E, démontrant des capacités impressionnantes de génération de texte et d'images à partir de descriptions textuelles.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2022</div>
+                    <h4>Stable Diffusion et ChatGPT</h4>
+                    <p>Lancement de Stable Diffusion (modèle open-source de génération d'images) et ChatGPT, démocratisant l'accès aux IA génératives auprès du grand public.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2023-2024</div>
+                    <h4>Modèles multimodaux et IA agents</h4>
+                    <p>Émergence de modèles comprenant plusieurs modalités (texte, image, audio) comme GPT-4V et Claude 3 Opus, et développement d'agents IA autonomes capables d'exécuter des tâches complexes.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Principaux modèles et acteurs</h3>
+        
+        <div class="models-grid">
+            <div class="model-card">
+                <div class="model-header">
+                    <h4>Grands Modèles de Langage (LLMs)</h4>
+                </div>
+                <div class="model-body">
+                    <p><strong>Leaders :</strong> OpenAI (GPT-4), Anthropic (Claude), Google (Gemini), Meta (Llama)</p>
+                    <p><strong>Capacités :</strong> Génération de texte, résumé, traduction, analyse, dialogue, programmation</p>
+                    <p><strong>Architecture :</strong> Transformers avec des milliards de paramètres entraînés sur des vastes corpus de texte</p>
+                    <p><strong>Particularité :</strong> Émergence de capacités de raisonnement avancé et compréhension contextuelle avec l'augmentation de la taille des modèles</p>
+                </div>
+            </div>
+            
+            <div class="model-card">
+                <div class="model-header">
+                    <h4>Modèles de Diffusion</h4>
+                </div>
+                <div class="model-body">
+                    <p><strong>Leaders :</strong> Stability AI (Stable Diffusion), OpenAI (DALL-E), Midjourney, Google (Imagen)</p>
+                    <p><strong>Capacités :</strong> Génération d'images à partir de descriptions textuelles, modification d'images existantes</p>
+                    <p><strong>Architecture :</strong> Processus itératif qui transforme progressivement le bruit aléatoire en images cohérentes</p>
+                    <p><strong>Particularité :</strong> Capacité à suivre des instructions précises et à adopter des styles artistiques spécifiques</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Applications et cas d'usage</h3>
+        
+        <div class="applications-grid">
+            <div class="application-item">
+                <div class="application-icon"><i class="fas fa-code"></i></div>
+                <h4>Développement logiciel</h4>
+                <p>Accélération du développement grâce aux assistants de codage comme GitHub Copilot et Amazon CodeWhisperer</p>
+            </div>
+            
+            <div class="application-item">
+                <div class="application-icon"><i class="fas fa-paint-brush"></i></div>
+                <h4>Création artistique</h4>
+                <p>Génération d'images, de musique et de vidéos ouvrant de nouvelles possibilités créatives</p>
+            </div>
+            
+            <div class="application-item">
+                <div class="application-icon"><i class="fas fa-language"></i></div>
+                <h4>Traduction et localisation</h4>
+                <p>Traduction contextuelle avancée et adaptation culturelle des contenus</p>
+            </div>
+            
+            <div class="application-item">
+                <div class="application-icon"><i class="fas fa-briefcase"></i></div>
+                <h4>Productivité professionnelle</h4>
+                <p>Rédaction de courriels, rapports et présentations avec assistance IA</p>
+            </div>
+        </div>
+        
+        <div class="tools-section">
+            <h3>Outils d'IA générative que j'utilise</h3>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h4>GitHub Copilot</h4>
+                    <p>Assistant de développement basé sur le modèle Codex d'OpenAI qui suggère du code en temps réel dans mon IDE.</p>
+                    <ul>
+                        <li>Suggestions de code intelligentes</li>
+                        <li>Complétion automatique de fonctions</li>
+                        <li>Génération de documentation et tests</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <h4>ChatGPT-4</h4>
+                    <p>Assistant conversationnel polyvalent que j'utilise pour la recherche, le brainstorming et la résolution de problèmes.</p>
+                    <ul>
+                        <li>Debugging de code complexe</li>
+                        <li>Exploration de concepts informatiques</li>
+                        <li>Conversion de specifications en architecture logicielle</li>
+                    </ul>
+                </div>
+                
+                <div class="tool-card">
+                    <h4>Midjourney</h4>
+                    <p>Outil de génération d'images pour la création de maquettes et visuels pour mes projets.</p>
+                    <ul>
+                        <li>Prototypage rapide d'interfaces</li>
+                        <li>Création d'illustrations personnalisées</li>
+                        <li>Exploration de concepts visuels</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Enjeux et défis</h3>
+        
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <h4>Droits d'auteur et propriété intellectuelle</h4>
+                <p>Les modèles d'IA générative sont entraînés sur des œuvres existantes, soulevant des questions sur l'originalité et les droits sur le contenu généré. Plusieurs procès sont en cours contre des entreprises d'IA par des artistes et éditeurs.</p>
+            </div>
+            
+            <div class="challenge-card">
+                <h4>Désinformation et deepfakes</h4>
+                <p>La capacité à générer du contenu réaliste facilite la création de fausses informations et de médias manipulés, menaçant potentiellement l'intégrité de l'information.</p>
+            </div>
+            
+            <div class="challenge-card">
+                <h4>Biais et représentation équitable</h4>
+                <p>Les modèles peuvent perpétuer ou amplifier les biais présents dans leurs données d'entraînement, nécessitant des efforts continus pour améliorer leur équité.</p>
+            </div>
+            
+            <div class="challenge-card">
+                <h4>Sécurité et contrôle</h4>
+                <p>Établir des garde-fous pour empêcher les utilisations malveillantes tout en permettant l'innovation représente un défi d'équilibre complexe.</p>
+            </div>
+        </div>
+        
+        <div class="sources-section">
+            <h3>Sources et veille continue</h3>
+            
+            <p>Pour rester informé sur les avancées en IA générative, je consulte régulièrement les sources suivantes :</p>
+            
+            <ul class="sources-list">
+                <li><a href="https://huggingface.co/blog" target="_blank">Hugging Face Blog</a> - Actualités et recherches sur les modèles ouverts</li>
+                <li><a href="https://openai.com/research" target="_blank">OpenAI Research</a> - Publications techniques des avancées en IA générative</li>
+                <li><a href="https://lilianweng.github.io" target="_blank">Lil'Log</a> - Blog technique sur l'apprentissage profond et l'IA</li>
+                <li><a href="https://arxiv.org/list/cs.CL/recent" target="_blank">arXiv (Computer Science - Computation and Language)</a> - Prépublications scientifiques</li>
+                <li><a href="https://github.blog/category/engineering/" target="_blank">GitHub Engineering Blog</a> - Évolutions des outils comme GitHub Copilot</li>
+            </ul>
+            
+            <p>Je teste régulièrement les nouvelles versions des outils d'IA et expérimente leurs applications dans mes projets pour maintenir une compréhension pratique des possibilités et limitations.</p>
+        </div>
+        
+        <a href="index.html#veille" class="return-button">
+            <i class="fas fa-arrow-left"></i> Retour au portfolio
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Portfolio BTS SIO SLAM - Tiego Ramamonjisoa</p>
+    </footer>
+
+    <!-- Bouton de retour en haut -->
+    <div id="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bouton de retour en haut
+            const scrollTopBtn = document.getElementById('scroll-top-btn');
+            if (scrollTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('show');
+                    } else {
+                        scrollTopBtn.classList.remove('show');
+                    }
+                });
+                
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

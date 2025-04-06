@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Attaques Zero-Day</title>
+    <!-- Lien vers les feuilles de style du portfolio -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern-effects.css">
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Styles spécifiques à la veille Zero-Day adaptés au nouveau design -->
+    <style>
+        /* Adaptations au nouveau design du portfolio */
+        .zero-day-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: var(--text-dark);
+        }
+        
+        .zero-day-header {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .zero-day-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+            opacity: 0.8;
+        }
+        
+        .zero-day-header h2 {
+            margin-top: 0;
+            font-weight: 700;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .zero-day-header p {
+            position: relative;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+        
+        .definition-box {
+            background-color: white;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0 15px 15px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .definition-box h3 {
+            color: var(--text-dark);
+            margin-top: 0;
+            font-weight: 700;
+        }
+        
+        .timeline-container {
+            position: relative;
+            margin: 3.5rem 0;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 15px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+        
+        .left {
+            left: 0;
+            transform: translateX(-20px);
+        }
+        
+        .right {
+            left: 50%;
+            transform: translateX(20px);
+        }
+        
+        .left::after {
+            right: -16px;
+        }
+        
+        .right::after {
+            left: -16px;
+        }
+        
+        .timeline-content {
+            padding: 1.8rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-content h4 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .case-studies {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .case-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background-color: white;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .case-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+        
+        .case-header {
+            background: var(--gradient-warm);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .case-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            opacity: 0.8;
+        }
+        
+        .case-header h4 {
+            margin: 0;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .case-body {
+            padding: 1.8rem;
+        }
+        
+        .case-body p {
+            margin-bottom: 1rem;
+        }
+        
+        .case-body p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .case-body strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+        
+        .impact-item {
+            background-color: white;
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .impact-item:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+        
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .impact-item h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .impact-item p {
+            margin-bottom: 0;
+        }
+        
+        .protection-section {
+            background-color: var(--tertiary-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 3.5rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .protection-section h3 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .protection-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-warm);
+            border-radius: 5px;
+        }
+        
+        .protection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .protection-card {
+            background-color: white;
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .protection-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 15px 30px rgba(45, 42, 50, 0.15);
+        }
+        
+        .protection-card h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .protection-card p {
+            margin-bottom: 1rem;
+        }
+        
+        .protection-card ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        
+        .protection-card li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .protection-card li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sources-section {
+            margin: 3.5rem 0;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .sources-section h3 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .sources-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-warm);
+            border-radius: 5px;
+        }
+        
+        .sources-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .sources-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        
+        .sources-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        .sources-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .sources-list a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        /* Styles pour le bouton de retour */
+        .return-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding: 12px 25px;
+            background-color: var(--light-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .return-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 42, 50, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .return-button i {
+            margin-right: 8px;
+        }
+        
+        /* Adaptations responsives */
+        @media (max-width: 992px) {
+            .timeline-container::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+                right: auto;
+            }
+            
+            .left, .right {
+                left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .zero-day-header {
+                padding: 1.8rem;
+            }
+            
+            .case-studies {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid, .protection-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Ajout de l'animation d'apparition */
+        .apparition {
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="index.html#competences">Compétences</a>
+            <a href="index.html#projets">Projets</a>
+            <a href="index.html#stages">Stages</a>
+            <a href="index.html#veille" class="active">Veille Tech</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <section class="zero-day-section">
+        <a href="index.html#veille" class="return-button">
+            <i class="fas fa-arrow-left"></i> Retour au portfolio
+        </a>
+        
+        <div class="zero-day-header">
+            <h2>Attaques Zero-Day : Une menace invisible</h2>
+            <p>Exploration des vulnérabilités inconnues et de leur impact sur la sécurité informatique moderne</p>
+        </div>
+        
+        <div class="definition-box">
+            <h3>Qu'est-ce qu'une attaque Zero-Day ?</h3>
+            <p>Une attaque zero-day exploite une vulnérabilité informatique inconnue des développeurs et pour laquelle aucun correctif n'existe encore. Le terme "zero-day" fait référence au fait que les développeurs ont "zéro jour" pour corriger la faille avant qu'elle ne soit exploitée.</p>
+        </div>
+        
+        <h3>Évolution des attaques Zero-Day</h3>
+        
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2010</div>
+                    <h4>Stuxnet</h4>
+                    <p>Premier malware reconnu utilisant plusieurs vulnérabilités zero-day pour cibler les systèmes de contrôle industriels iraniens. A marqué le début d'une nouvelle ère d'armes cyber sophistiquées.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2014</div>
+                    <h4>Heartbleed</h4>
+                    <p>Vulnérabilité critique dans la bibliothèque OpenSSL permettant de voler des informations protégées. A affecté environ 17% des serveurs web sécurisés d'Internet.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2017</div>
+                    <h4>EternalBlue</h4>
+                    <p>Exploit développé par la NSA puis divulgué, exploitant une vulnérabilité dans SMB de Windows. A servi de base aux ransomwares WannaCry et NotPetya.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2020-2021</div>
+                    <h4>SolarWinds & Microsoft Exchange</h4>
+                    <p>Attaques sophistiquées utilisant des vulnérabilités zero-day pour compromettre des milliers d'organisations, y compris des agences gouvernementales américaines.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2023-2024</div>
+                    <h4>Exploitation de vulnérabilités dans les chaînes d'approvisionnement</h4>
+                    <p>Évolution vers des attaques ciblant les fournisseurs de logiciels et les chaînes d'approvisionnement pour maximiser l'impact.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Études de cas récentes</h3>
+        
+        <div class="case-studies">
+            <div class="case-card">
+                <div class="case-header">
+                    <h4>Log4Shell (CVE-2021-44228)</h4>
+                </div>
+                <div class="case-body">
+                    <p><strong>Découverte :</strong> Décembre 2021</p>
+                    <p><strong>Impact :</strong> Critique (CVSS 10.0/10)</p>
+                    <p><strong>Systèmes affectés :</strong> Applications Java utilisant Log4j 2</p>
+                    <p><strong>Méthode d'exploitation :</strong> Injection JNDI permettant l'exécution de code à distance</p>
+                    <p><strong>Particularité :</strong> Facilité d'exploitation exceptionnelle et omniprésence de la bibliothèque affectée</p>
+                </div>
+            </div>
+            
+            <div class="case-card">
+                <div class="case-header">
+                    <h4>Follina (CVE-2022-30190)</h4>
+                </div>
+                <div class="case-body">
+                    <p><strong>Découverte :</strong> Mai 2022</p>
+                    <p><strong>Impact :</strong> Élevé (CVSS 7.8/10)</p>
+                    <p><strong>Systèmes affectés :</strong> Microsoft Office</p>
+                    <p><strong>Méthode d'exploitation :</strong> Utilisation du protocole MSDT pour exécuter du code via des documents Office</p>
+                    <p><strong>Particularité :</strong> Contournement des protections Microsoft et exploitation via simple prévisualisation</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Impact des attaques Zero-Day</h3>
+        
+        <div class="impact-grid">
+            <div class="impact-item">
+                <div class="impact-icon">💰</div>
+                <h4>Économique</h4>
+                <p>Coût moyen d'une brèche zero-day : 5,2 millions $ (2023)</p>
+            </div>
+            
+            <div class="impact-item">
+                <div class="impact-icon">🕒</div>
+                <h4>Temporel</h4>
+                <p>Délai moyen avant détection : 287 jours</p>
+            </div>
+            
+            <div class="impact-item">
+                <div class="impact-icon">🌐</div>
+                <h4>Réputation</h4>
+                <p>76% des clients perdent confiance après une violation de données</p>
+            </div>
+            
+            <div class="impact-item">
+                <div class="impact-icon">⚖️</div>
+                <h4>Légal</h4>
+                <p>Amendes RGPD pouvant atteindre 4% du CA mondial</p>
+            </div>
+        </div>
+        
+        <div class="protection-section">
+            <h3>Stratégies de protection</h3>
+            
+            <div class="protection-grid">
+                <div class="protection-card">
+                    <h4>Défense en profondeur</h4>
+                    <p>Mise en place de multiples couches de sécurité pour limiter les dégâts même en cas d'exploitation d'une vulnérabilité zero-day</p>
+                    <ul>
+                        <li>Segmentation réseau</li>
+                        <li>Principe du moindre privilège</li>
+                        <li>Contrôles d'accès stricts</li>
+                    </ul>
+                </div>
+                
+                <div class="protection-card">
+                    <h4>Détection des comportements anormaux</h4>
+                    <p>Technologies de détection basées sur le comportement plutôt que sur les signatures</p>
+                    <ul>
+                        <li>EDR (Endpoint Detection and Response)</li>
+                        <li>XDR (Extended Detection and Response)</li>
+                        <li>Analyse comportementale des utilisateurs</li>
+                    </ul>
+                </div>
+                
+                <div class="protection-card">
+                    <h4>Réponse aux incidents</h4>
+                    <p>Préparation et entraînement pour réagir rapidement en cas d'attaque</p>
+                    <ul>
+                        <li>Plan de réponse documenté</li>
+                        <li>Exercices de simulation réguliers</li>
+                        <li>Isolation rapide des systèmes compromis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sources-section">
+            <h3>Sources et veille continue</h3>
+            
+            <p>Pour rester informé sur les menaces zero-day, je consulte régulièrement les sources suivantes :</p>
+            
+            <ul class="sources-list">
+                <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank">CERT-FR</a> - Bulletin d'alerte de l'ANSSI</li>
+                <li><a href="https://nvd.nist.gov/" target="_blank">NVD (National Vulnerability Database)</a> - Base de données des vulnérabilités</li>
+                <li><a href="https://googleprojectzero.blogspot.com/" target="_blank">Project Zero (Google)</a> - Recherche et publication de vulnérabilités</li>
+                <li><a href="https://www.zerodayinitiative.com/" target="_blank">Zero Day Initiative</a> - Programme de divulgation responsable</li>
+                <li><a href="https://www.cisa.gov/uscert/" target="_blank">US-CERT</a> - Alertes de sécurité du gouvernement américain</li>
+            </ul>
+            
+            <p>Je synthétise ces informations dans un tableau de bord personnalisé pour suivre l'évolution des menaces et adapter les stratégies de protection en conséquence.</p>
+        </div>
+        
+        <a href="index.html#veille" class="return-button">
+            <i class="fas fa-arrow-left"></i> Retour au portfolio
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Portfolio BTS SIO SLAM - Tiego Ramamonjisoa</p>
+    </footer>
+
+    <!-- Bouton de retour en haut -->
+    <div id="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Masquer l'overlay de chargement une fois la page chargée
+            setTimeout(() => {
+                document.querySelector('.loading-overlay').classList.add('hidden');
+            }, 800);
+            
+            // Animation au scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        
+                        if (entry.target.classList.contains('timeline-item')) {
+                            entry.target.style.transform = 'translateX(0)';
+                        } else {
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            // Observer les éléments de la timeline
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Observer les cartes d'études de cas
+            const caseCards = document.querySelectorAll('.case-card');
+            caseCards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Observer les éléments d'impact
+            const impactItems = document.querySelectorAll('.impact-item');
+            impactItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Observer les cartes de protection
+            const protectionCards = document.querySelectorAll('.protection-card');
+            protectionCards.forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Bouton de retour en haut
+            const scrollTopBtn = document.getElementById('scroll-top-btn');
+            if (scrollTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('show');
+                    } else {
+                        scrollTopBtn.classList.remove('show');
+                    }
+                });
+                
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
